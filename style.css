@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#setting {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border: 1px solid black;
+  z-index: 1;
+  border-radius: 3px;
+}
+
+.setting_heading {
+  text-align: center;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.setting_container {
+  padding: 7px;
+}
+
+select[name="board_size"] {
+  cursor: pointer;
+}
+
+#checkerboard {
+  --board-size: 7;
+  --piece-size: calc(90vmin / var(--board-size));
+  --piece-gap: 0.4vmin;
+  display: grid;
+  grid-template-columns: repeat(var(--board-size), var(--piece-size));
+  grid-template-rows: repeat(var(--board-size), var(--piece-size));
+  background-color: rgb(41, 41, 41);
+  gap: var(--piece-gap);
+  border-radius: 0.5vmin;
+  padding: var(--piece-gap);
+  position: relative;
+  box-shadow: 3px 3px 5px rgb(203, 203, 203);
+}
+
+.cell {
+  background-color: rgb(200, 155, 87);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4vmin;
+  cursor: pointer;
+}
+
+.piece {
+  background-color: var(--bg-color);
+  width: var(--piece-size);
+  height: var(--piece-size);
+  position: absolute;
+  top: calc(
+    var(--y) * (var(--piece-size) + var(--piece-gap)) + var(--piece-gap)
+  );
+  left: calc(
+    var(--x) * (var(--piece-size) + var(--piece-gap)) + var(--piece-gap)
+  );
+  border-radius: 50%;
+  border: 0.5vmin solid rgb(200, 155, 87);
+}
+
+.turn_div,
+.regret_div,
+.timer_div {
+  cursor: pointer;
+}
