@@ -97,10 +97,11 @@ $("select[name='board_size']").on("change", function () {
 })
 
 $(".turn_div").on("click", function () {
+  $(".timer_div").css("pointer-events", "none")
   turn_change()
 })
 
-$(".regret").on("click", function () {
+$(".regret_div").on("click", function () {
   if ($(".piece").get(-1) === undefined) return false
   $(".piece").get(-1).remove()
   turn_change()
