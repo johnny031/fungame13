@@ -6,6 +6,7 @@
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  font-family: Arial;
 }
 
 body {
@@ -39,32 +40,71 @@ select[name="board_size"] {
   cursor: pointer;
 }
 
+.board-wrapper {
+  --board-color: rgb(221, 168, 93);
+  background-color: var(--board-color);
+  padding: 4vmin;
+  border: 0.5vmin solid rgb(241, 189, 116);
+  border-radius: 0.5vmin;
+}
+
 #checkerboard {
   --board-size: 7;
-  --piece-size: calc(90vmin / var(--board-size));
-  --piece-gap: 0.4vmin;
+  --piece-size: calc(85vmin / var(--board-size));
+  --piece-gap: 0.2vmin;
+  --text-color: rgb(54, 54, 54);
+  --grid-color: rgb(47, 47, 47);
   display: grid;
   grid-template-columns: repeat(var(--board-size), var(--piece-size));
   grid-template-rows: repeat(var(--board-size), var(--piece-size));
-  background-color: rgb(41, 41, 41);
+  background-color: var(--grid-color);
   gap: var(--piece-gap);
-  border-radius: 0.5vmin;
   padding: var(--piece-gap);
   position: relative;
-  box-shadow: 3px 3px 5px rgb(203, 203, 203);
 }
 
 .cell {
-  background-color: rgb(200, 155, 87);
+  background-color: var(--board-color);
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4vmin;
+  font-size: 3.6vmin;
   cursor: pointer;
+  position: relative;
+}
+
+.cell.x-coordinate-top::before,
+.cell.x-coordinate-bottom::before {
+  content: attr(data-x-coordinate);
+  position: absolute;
+  top: -3.9vmin;
+  font-size: 2.7vmin;
+  color: var(--grid-color);
+}
+
+.cell.x-coordinate-bottom::before {
+  top: auto;
+  bottom: -3.9vmin;
+}
+
+.cell.y-coordinate-left::after,
+.cell.y-coordinate-right::after {
+  content: attr(data-y-coordinate);
+  position: absolute;
+  left: -2.5vmin;
+  transform: translateX(-50%);
+  font-size: 2.7vmin;
+  color: var(--grid-color);
+}
+
+.cell.y-coordinate-right::after {
+  left: auto;
+  right: -2.5vmin;
+  transform: translateX(50%);
 }
 
 .piece {
-  background-color: var(--bg-color);
   width: var(--piece-size);
   height: var(--piece-size);
   position: absolute;
@@ -75,7 +115,25 @@ select[name="board_size"] {
     var(--x) * (var(--piece-size) + var(--piece-gap)) + var(--piece-gap)
   );
   border-radius: 50%;
-  border: 0.5vmin solid rgb(200, 155, 87);
+  border: 0.5vmin solid var(--board-color);
+}
+
+.piece.black {
+  background: radial-gradient(
+    circle at 40% 35%,
+    hsl(0, 0%, 40%) 0%,
+    hsl(0, 0%, 15%) 30%,
+    hsl(0, 0%, 0%) 100%
+  );
+}
+
+.piece.white {
+  background: radial-gradient(
+    circle at 40% 35%,
+    hsl(0, 0%, 100%) 0%,
+    hsl(0, 0%, 95%) 30%,
+    hsl(0, 0%, 80%) 100%
+  );
 }
 
 .turn_div,

@@ -33,10 +33,31 @@ function rander_board(size) {
   $("#checkerboard").get(0).style.setProperty("--board-size", size);
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
-      $("#checkerboard").append(`<div class="cell ${j}${i}">${random_char[i * size + j]}</div>`)
+      $("#checkerboard").append(`
+      <div class="cell" data-x=${j} data-y=${i}>${random_char[i * size + j]}</div>
+      `)
     }
   }
+  $(`.cell:nth-child(-n + ${size})`).addClass("x-coordinate-top")
+  $(`.cell:nth-last-child(-n + ${size})`).addClass("x-coordinate-bottom")
+  $(".x-coordinate-top").each(function (i) {
+    $(this).attr("data-x-coordinate", String.fromCharCode(i + 65))
+  })
+  $(".x-coordinate-bottom").each(function (i) {
+    $(this).attr("data-x-coordinate", String.fromCharCode(i + 65))
+  })
+
+  $("[data-x=0]").addClass("y-coordinate-left")
+  $(`[data-x=${size - 1}]`).addClass("y-coordinate-right")
+  $(".y-coordinate-left").each(function (i) {
+    $(this).attr("data-y-coordinate", size - i)
+  })
+  $(".y-coordinate-right").each(function (i) {
+    $(this).attr("data-y-coordinate", size - i)
+  })
+
 }
+
 
 rander_board(7)
 
@@ -50,8 +71,8 @@ function turn_change() {
 $("body").on("click", ".cell", function () {
   $(".timer_div").css("pointer-events", "none")
 
-  let x = $(this).attr("class").split(" ")[1][0]
-  let y = $(this).attr("class").split(" ")[1][1]
+  let x = $(this).attr("data-x")
+  let y = $(this).attr("data-y")
   $("#checkerboard").append(`<div class="piece"></div>`)
   $(".piece").get(-1).style.setProperty("--x", x)
   $(".piece").get(-1).style.setProperty("--y", y)
@@ -59,8 +80,8 @@ $("body").on("click", ".cell", function () {
   turn_change()
 
   round ?
-    $(".piece").get(-1).style.setProperty("--bg-color", "#ffffffe6") :
-    $(".piece").get(-1).style.setProperty("--bg-color", "#000000e6")
+    $(".piece").eq(-1).addClass("white") :
+    $(".piece").eq(-1).addClass("black")
 })
 
 function startTimer_b() {

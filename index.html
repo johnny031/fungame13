@@ -19,11 +19,20 @@
       <div>
         <label for="size">選擇棋盤大小:</label>
         <select name="board_size" id="size">
+          <option value="3">3 X 3</option>
+          <option value="4">4 X 4</option>
+          <option value="5">5 X 5</option>
           <option value="6">6 X 6</option>
           <option value="7" selected>7 X 7</option>
           <option value="8">8 X 8</option>
           <option value="9">9 X 9</option>
           <option value="10">10 X 10</option>
+          <option value="11">11 X 11</option>
+          <option value="12">12 X 12</option>
+          <option value="13">13 X 13</option>
+          <option value="14">14 X 14</option>
+          <option value="15">15 X 15</option>
+          <option value="16">16 X 16</option>
         </select>
       </div>
       <div class="turn_div">
@@ -40,7 +49,9 @@
       </div>
     </div>
   </div>
-  <div id="checkerboard"></div>
+  <div class="board-wrapper">
+    <div id="checkerboard"></div>
+  </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="charactor.js"></script>
