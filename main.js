@@ -82,6 +82,8 @@ $("body").on("click", ".cell", function () {
   round ?
     $(".piece").eq(-1).addClass("white") :
     $(".piece").eq(-1).addClass("black")
+
+  $(this).css("pointer-events", "none")
 })
 
 function startTimer_b() {
