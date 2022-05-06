@@ -129,7 +129,13 @@ $(".turn_div").on("click", function () {
 
 $(".regret_div").on("click", function () {
   if ($(".piece").get(-1) === undefined) return false
+  let x = $(".piece").eq(-1).css("--x"),
+    y = $(".piece").eq(-1).css("--y")
+
   $(".piece").get(-1).remove()
+
+  $(`.cell[data-x=${x}][data-y=${y}]`).css("pointer-events", "auto")
+
   turn_change()
 })
 
