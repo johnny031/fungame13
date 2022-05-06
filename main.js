@@ -15,7 +15,10 @@ function shuffle(a) {
 
 function rander_board(size) {
   let random_char = shuffle(charactors).slice(0, size * size)
+
   round = true
+  $(".turn").html("黑")
+
   clearInterval(interval_b)
   clearInterval(interval_w)
   timer_b = 1
